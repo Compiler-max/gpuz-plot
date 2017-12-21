@@ -17,12 +17,13 @@ print('********PLot GPU-Z sensor log files data********')
 if len(sys.argv) > 1:
 	fileName = sys.argv[1]
 else: 
-	print('please provide a log file')
 	fileName	= "GPU-Z Sensor Log.txt"
-	if not os.path.isfile(fileName):
-		sys.exit()
-	else:
-		print('found a input file')
+	print('please provide a log file or rename input file to: \''+str(fileName)+'\'')
+
+if not os.path.isfile(fileName):
+	print('input file does not exist')
+	sys.exit()
+	
 
 
 
