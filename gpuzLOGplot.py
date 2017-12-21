@@ -1,16 +1,29 @@
 #!/usr/bin/python
 #Plots data from the GPU-Z log file
 
+import sys
+import os.path
 import numpy as np
 from datetime import datetime, date, time, timedelta
 import matplotlib.pyplot as plt
 
 
-
-
 #PRINT HEADER
 print('*\n*\n*\n*')
 print('********PLot GPU-Z sensor log files data********')
+
+
+#GET INPUT FILE
+if len(sys.argv) > 1:
+	fileName = sys.argv[1]
+else: 
+	print('please provide a log file')
+	fileName	= "GPU-Z Sensor Log.txt"
+	if not os.path.isfile(fileName):
+		sys.exit()
+	else:
+		print('found a input file')
+
 
 
 
@@ -20,7 +33,7 @@ print('********PLot GPU-Z sensor log files data********')
 
 
 #READ FILE
-fileName	= "GPU-Z Sensor Log.txt"
+
 file 		= open(fileName,'r')
 
 
@@ -73,7 +86,7 @@ data			= np.reshape(rawData,(nSteps,nCurves) )
 
 xlabel = 'time [s]'
 
-#GENERATE THE PLOTS
+##GENERATE THE PLOTS
 for i in range(nCurves):
 	xmax	= time[np.argmax(rawData[:,i])]
 	ymax	= rawData[:,i].max()
